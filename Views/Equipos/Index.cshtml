@@ -1,0 +1,84 @@
+﻿@{
+    IEnumerable<string> equiposList = new List<string> { "HP", "Xiaomi", "Samsung" };
+}
+<h1>MANTENIMIENTO DE EQUIPOS</h1>
+<br>
+<form asp-action="CrearEquipos">
+    @*INICIO DEL FORMULARIO*@
+    <div class="row">
+        <div class="col-xl">
+            @Html.Label("lblNombre", "NOMBRE")
+            @Html.TextBox("txtNombre", "", new {@class="form-control"})
+        </div>
+        <div class="col-xl">
+            @Html.Label("lblDescripcion", "DESCRIPCIÓN")
+            @Html.TextBox("txtDescripcion", "", new {@class="form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl">
+            @Html.Label("lbltipo", "TIPO DE EQUIPO")
+            @Html.DropDownList("id_equipos", ViewData["listatipo"] as SelectList, "Seleccione un equipo", new {@class="form-control"} )
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xl">
+            @Html.Label("lblMarca", "MARCA")
+            @Html.DropDownList("id_marca", ViewData["listaMarca"] as SelectList, "Seleccione una marca", new {@class="form-control"} )
+        </div>
+        <div class="col-xl">
+            @Html.Label("lblModelo", "MODELO")
+            @Html.TextBox("txtModelo", "", new {@class="form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl">
+            @Html.Label("lblAnioCompra", "AÑO DE COMPRA")
+            @Html.TextBox("txtAnioCompra", "", new {@class="form-control"})
+        </div>
+        <div class="col-xl">
+            @Html.Label("lblCosto", "COSTO")
+            @Html.TextBox("txtCosto", "", new {@class="form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl">
+            @Html.Label("lblVidaUTil", "VIDA UTIL")
+            @Html.TextBox("txtVidaUtil", "", new {@class="form-control"})
+        </div>
+        <div class="col-xl">
+            @Html.Label("lblEstado", "ESTADO DEL EQUIPO")
+            @Html.DropDownList("id_estados_equipo", ViewData["listaEstado"] as SelectList, "Seleccione una estado", new {@class="form-control"} )
+        </div>
+    </div>
+    <div>
+        <p>Inactivo</p>
+        @Html.CheckBox("Inactivo", false)
+    </div>
+    <br >
+    <button type="button" class="btn btn-primary btn-sm">Guardar</button>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Equipo</th>
+                <th>Descripción</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var equipo in (IEnumerable<dynamic>)ViewData["listadoEquipo"])
+                {
+                    <tr>
+                        <td>@equipo.nombre</td>
+                        <td>@equipo.descripcion</td>
+                        <td>@equipo.marca_nombre</td>
+                    </tr>
+
+                }
+        </tbody>
+    </table>
+
+    @*FIN DEL FORMULARIO*@
+</form>
